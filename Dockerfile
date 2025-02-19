@@ -33,5 +33,5 @@ RUN poetry install --no-root
 COPY . .
 
 # Command to run the application
-CMD ["python", "app.py"]
+CMD ["python"]
 
