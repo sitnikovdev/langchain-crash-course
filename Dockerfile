@@ -24,7 +24,7 @@ ENV PATH="/root/.local/bin:${PATH}"
 WORKDIR /app
 
 # Copy dependency files first for caching purposes
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml  ./
 
 # Install project dependencies
 RUN poetry install --no-root
@@ -32,6 +32,8 @@ RUN poetry install --no-root
 # Copy application code into the container
 COPY . .
 
-# Command to run the application
-CMD ["python"]
+# Expose the port Jupyter Notebook will run on
+EXPOSE 8888
 
+# Command to run Jupyter Notebook
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
